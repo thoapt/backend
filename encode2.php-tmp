@@ -8,10 +8,10 @@
 </head>
 <body>
 	<pre>
-		<?php
-			$name = $_GET['name'];
-            echo $name;	
-        ?>
+<?php
+$name = $_GET['name'];
+echo $name;
+?>
 	</pre>
 </body>
 </html>

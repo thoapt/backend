@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<?php 
+	session_start();
+	$_SESSION=array();
+	// destroy session
+	session_destroy();
+	//delete cookies
+	setcookie('PHPSESSID','',time()-3600,'/','',0,0);
+?>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<p>ban da logout thanh cong</p>
+</body>
+</html>

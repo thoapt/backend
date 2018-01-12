@@ -7,11 +7,8 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	<pre>
-		<?php
-			$name = $_GET['name'];
-            echo $name;	
-        ?>
-	</pre>
+<?php
+header("Location: calendar.php");
+?>
 </body>
 </html>

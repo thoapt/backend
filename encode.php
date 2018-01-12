@@ -7,8 +7,7 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	<?php 
-		echo "<a href='encode2.php?name= <?php echo urlencode('congvu',20);?>'> URL encode</a>";
-	?>
+	 <a href='<?php echo rawurlencode('encode2.php');?>?name=<?php echo urlencode('cong vu'); ?>'>
+            <?php echo htmlentities('<script>URL Encode</script>'); ?></a>
 </body>
 </html>

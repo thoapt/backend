@@ -7,11 +7,12 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
-	<pre>
-		<?php
-			$name = $_GET['name'];
-            echo $name;	
-        ?>
-	</pre>
+	<?php
+				function build_form($value){
+					foreach ($value as $k=>$v){
+				echo "<option value='{$k}'>".$v."</option>";
+			}
+				}
+			?>
 </body>
 </html>
