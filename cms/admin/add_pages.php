@@ -55,6 +55,7 @@
 		?>						
 		<div id="content">
 			<h2>Add new page</h2>
+			<form action="" method="post" id="add_page">
 				<fieldset>
 					<legend>Add a Page</legend>
 					<div>

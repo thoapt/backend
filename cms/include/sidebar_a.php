@@ -10,37 +10,40 @@
 	<div id="content-container">
 		<div id="section-navigation">
 			<ul class="navi">
-				<li><a href="#">Home</a>
-					<ul class="pages">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Clients</a></li>
-						<li><a href="#">Contact Us</a></li>
-					</ul>
-				</li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Clients</a>
-					<ul class="pages">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Clients</a></li>
-						<li><a href="#">Contact Us</a></li>
-					</ul>
-				</li>
-				<li><a href="#">Contact Us</a></li>
 				<?php
+				// xac dinh cat_id de to dam link
+				if (isset($_GET['cid']) && filter_var($_GET['cid'],FILTER_VALIDATE_INT, array('min_range'=>1))) 
+				{
+					$cid=$_GET['cid'];
+					$pid=NULL;
+				}
+				 elseif (isset($_GET['pid']) && filter_var($_GET['pid'],FILTER_VALIDATE_INT, array('min_range'=>1))) 
+				{
+					$pid=$_GET['pid'];	
+					$cid=NULL;
+				}
+					else{
+						$cid=NULL;
+						$pid=NULL;
+					}
+
+				// cau lenh truy xuat category
 					$q="select cat_name, cat_id from categories order by position";
 					$r= mysqli_query($dbc,$q) or die("Query {$q} \n<br> MySQL error: ".mysqli_error($dbc));
 					// lay categories tu co so du lieu
 					while ($cats = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-						echo "<li><a href='index1.php'>".$cats['cat_name']."</a>";
+						echo "<li><a href='index1.php?cid={$cats['cat_id']}'";
+							if ($cats['cat_id'] == $cid) echo "class='selected'";
+						echo ">".$cats['cat_name']."</a>";
 							// cau lenh truy xuat page
 						$q1 = "select page_name,page_id from pages where (cat_id = {$cats['cat_id']}) order by position";
 						$r1 = mysqli_query($dbc,$q1) or die("Query {$q1} \n<br> MySQL error: ".mysqli_error($dbc));
 						echo "<ul class='pages'>";
-						// lay pages tuw CSDL
+						// lay pages tu CSDL
 						while ($pages=mysqli_fetch_array($r1, MYSQLI_ASSOC)) {
-							echo "<li><a href=''>".$pages['page_name']."</a></li>";
+							echo "<li><a href='index1.php?pid={$pages['page_id']}'";
+								if ($pages['page_id'] == $pid) echo "class= 'selected'";
+							echo ">".$pages['page_name']."</a></li>";
 						}// end while page
 						echo "</ul>";
 						echo "</li>";

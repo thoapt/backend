@@ -78,3 +78,6 @@ width: 20%;
 #footer ul li a{
 	color: #151577;
 }
+.selected{
+	font-weight: bold;
+}
