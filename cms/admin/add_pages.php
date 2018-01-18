@@ -10,55 +10,55 @@
 	<?php include('../include/header.php');?>
 	<?php include('../include/mysqli_connect.php');?>
 	<?php include('../include/sidebar_admin.php');?>
-		<?php 
-			if($_SERVER['REQUEST_METHOD']== 'POST'){// GIA TRi TON TAI, XU LI FORM
+		<?php
+			// GIA TRi TON TAI, XU LI FORM
+			if($_SERVER['REQUEST_METHOD']== 'POST')
+			{
 				$errors= array();
 				if(empty($_POST['page_name'])){
 					$errors[]='page_name';
-				} else{
+				}else{
 					$page_name = mysqli_real_escape_string($dbc,strip_tags($_POST['page_name']));
 				}
 				if(isset($_POST['category']) && filter_var($_POST['category'], FILTER_VALIDATE_INT, array('min_range'=>1))){
 					$cat_id=$_POST['category'];
-				} else{
+				}else{
 					$errors[]= "category";
 				}
-			if(isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range'=>1))){
-					$position=$_POST['position'];
-				} else{
+				if(isset($_POST['position']) && filter_var($_POST['position'], FILTER_VALIDATE_INT, array('min_range'=>1))){
+						$position=$_POST['position'];
+				}else{
 					$errors[]= "position";
 				}
-			if(empty($_POST['content'])){
-				$errors[]='content';
-			}else{
-				$content=mysqli_real_escape_string($dbc,$_POST['content']);
-			}
-
-			if(empty($errors))
-				{// neu k co loi xay ra bat dau chen du lieu vao BD
-				
+				if(empty($_POST['content'])){
+					$errors[]='content';
+				}else{
+					$content=mysqli_real_escape_string($dbc,$_POST['content']);
+				}
+				// neu k co loi xay ra bat dau chen du lieu vao BD
+				if(empty($errors))
+				{
 					$q= "insert into pages (user_id,cat_id ,page_name,content, position, post_on) value(1, {$cat_id}, '{$page_name}', '{$content}',$position, now()) ";
 					$r= mysqli_query($dbc, $q) or die("Query {$q} \n <br> MySQL Error:" .mysqli_error($dbc)); // ordie: bao loi ket noi sql fail
 					if(mysqli_affected_rows($dbc)== 1)
-						{
-							$messages="<p class= 'success'>The page was added successfully.</p>";
-						} 
+					{
+						$messages="<p class= 'success'>The page was added successfully.</p>";
+					} 
 					else 
-						{
-							$messages = "<p class= 'warning'>The page could not be added due to a system error.</p>";
-						} 
+					{
+						$messages = "<p class= 'warning'>The page could not be added due to a system error.</p>";
+					} 
 				}
-			else
+				else
 				{
 					$messages="<p class= 'warning'>Please fill in all the required fields.</p>";
 				}
-			}
-			// end main if submit condition
+			}//End if for POST SERVER
 		?>						
 		<div id="content">
-			<h2>Create a category </h2>
-			<?php //if(!empty($messages)) echo $messages;?>
-			<form action="" id="login" method="post">
+			<h2>Add new page</h2>
+			<?php if(!empty($messages)) echo $messages;?>
+			<form action="add_pages.php" id="login" method="post">
 				<fieldset>
 					<legend>Add a Page</legend>
 					<div>
@@ -133,9 +133,9 @@
 						<textarea name="content" cols="50" rows="20"></textarea>
 					</div>
 				</fieldset>
-				<p><input type="submit" value="Add Page" name="submit"/></p>
+				<p><input type="submit" value="Add Page" name="submit"></p>
 			</form>
-		</div> 
+		</div> <!-- end content-->
 	<?php include('../include/sidebar_b.php');?>
 	<?php include('../include/footer.php');?>
 </body>
