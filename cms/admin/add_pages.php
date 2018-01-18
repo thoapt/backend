@@ -10,10 +10,6 @@
 	<?php include('../include/header.php');?>
 	<?php include('../include/mysqli_connect.php');?>
 	<?php include('../include/sidebar_admin.php');?>
-		<?php
-			// GIA TRi TON TAI, XU LI FORM
-			if($_SERVER['REQUEST_METHOD']== 'POST')
-			{
 				$errors= array();
 				if(empty($_POST['page_name'])){
 					$errors[]='page_name';
@@ -57,11 +53,10 @@
 		?>						
 		<div id="content">
 			<h2>Add new page</h2>
-			<?php if(!empty($messages)) echo $messages;?>
-			<form action="add_pages.php" id="login" method="post">
 				<fieldset>
 					<legend>Add a Page</legend>
 					<div>
+		</div> <!-- end content-->
 						<label for="page">Page Name: <span class="required">*</span>
 
 							<?php
@@ -135,7 +130,6 @@
 				</fieldset>
 				<p><input type="submit" value="Add Page" name="submit"></p>
 			</form>
-		</div> <!-- end content-->
 	<?php include('../include/sidebar_b.php');?>
 	<?php include('../include/footer.php');?>
 </body>
